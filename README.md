@@ -3,7 +3,7 @@
 Travis (.com) dev branch:
 [![Build Status](https://travis-ci.com/githubfoam/macos_sandbox.svg?branch=dev)](https://travis-ci.com/githubfoam/macos_sandbox)  
 
-Travis (.com) dev branch:
+Travis (.com) feature vertical branch:
 [![Build Status](https://travis-ci.com/githubfoam/macos_sandbox.svg?branch=feature_vertical)](https://travis-ci.com/githubfoam/macos_sandbox)
 
 ~~~
