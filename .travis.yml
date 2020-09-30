@@ -28,6 +28,14 @@ matrix:
       os: osx
       osx_image: #installer: Error - Your CPU does not have the features necessary for Multipass. Installation cannot proceed
         - xcode11.5
+      addons:
+        homebrew:
+          casks:
+          - dotnet-sdk
+          - multipass
+          packages:
+          - beanstalk
+          update: true
       language: shell
       before_install:
         - pip install virtualenv
@@ -44,7 +52,33 @@ matrix:
         # - brew cask uninstall multipass
         - deactivate
 
-
+    - name: "Python 3.7.5 on macOS 10.15.5 osx xcode12u"
+      os: osx
+      osx_image: #installer: Error - Your CPU does not have the features necessary for Multipass. Installation cannot proceed
+        - xcode12u
+      addons:
+        homebrew:
+          casks:
+          - dotnet-sdk
+          - multipass
+          packages:
+          - beanstalk
+          update: true
+      language: shell
+      before_install:
+        - pip3 install virtualenv
+        - virtualenv -p $(which python3) ~venvpy3
+        - source ~venvpy3/bin/activate
+      <<: *fleet_install_tasks
+      <<: *fleet_script_tasks
+      script:
+        # - /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+        # - brew cask install multipass
+        # - multipass version
+        - brew list --versions
+      after_success:
+        # - brew cask uninstall multipass
+        - deactivate
 
     - name: "Python 2.7.17 on macOS xcode10.2"
       os: osx
