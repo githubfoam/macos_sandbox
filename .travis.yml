@@ -1,11 +1,35 @@
 ---
-sudo: required
-dist: bionic
+language: c
+os:
+  - osx
+osx_image:
+  - xcode12u
+  - xcode12
+  - xcode11.6
+  - xcode11.5
+  - xcode11.4
+  - xcode11.3
+  - xcode11.2
+  - xcode11.1
+  - xcode11
+  - xcode10
+  - xcode9.4
+  - xcode9
+  # - xcode8 #ImportError: No module named zipp
+addons:
+ homebrew:
+  casks:
+  - mactex
+  packages:
+  - multipass
+
+env:
+  global:
+  - VAGRANT_CURRENT_VERSION="$(curl -s https://checkpoint-api.hashicorp.com/v1/check/vagrant | jq -r -M '.current_version')"
 
 notifications:
   slack:
     on_failure: always
-
 
 fleet_script_tasks : &fleet_script_tasks
       script:
@@ -14,75 +38,15 @@ fleet_install_tasks : &fleet_install_tasks
       install:
         - pip install -r requirements.txt
 
+before_install: #Python 2.7.17
+  - pip install virtualenv
+  - virtualenv -p $(which python2) ~venvpy2
+  - source ~venvpy2/bin/activate
+<<: *fleet_install_tasks
+<<: *fleet_script_tasks
 
-matrix:
-  fast_finish: true
-  include:
+script:
+  - brew list --versions
 
-    #The default backend on macOS is hyperkit, wrapping Apple’s Hypervisor.framework
-    #You need macOS Yosemite, version 10.10.3 or later installed on a 2010 or newer Mac
-    #https://docs.travis-ci.com/user/reference/osx/#macos-version
-    # https://multipass.run/docs/installing-on-macos
-    # https://brew.sh/
-    - name: "multipass on macOS 10.15.4 osx xcode11.5"
-      os: osx
-      osx_image: #installer: Error - Your CPU does not have the features necessary for Multipass. Installation cannot proceed
-        - xcode11.5
-      language: shell
-      before_install:
-        - pip install virtualenv
-        - virtualenv -p $(which python2) ~venvpy2
-        - source ~venvpy2/bin/activate
-      <<: *fleet_install_tasks
-      <<: *fleet_script_tasks
-      script:
-        # - /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-        # - brew cask install multipass
-        # - multipass version
-        - brew list --versions
-      after_success:
-        # - brew cask uninstall multipass
-        - deactivate
-
-
-
-    - name: "Python 2.7.17 on macOS xcode10.2"
-      os: osx
-      osx_image: xcode10.2
-      language: shell
-      before_install:
-        - pip install virtualenv
-        - virtualenv -p $(which python2) ~venvpy2
-        - source ~venvpy2/bin/activate
-      <<: *fleet_install_tasks
-      <<: *fleet_script_tasks
-      after_success:
-        - deactivate
-    
-        
-    
-    - name: "Python 3.7.5 on macOS xcode10.2"
-      os: osx
-      osx_image: xcode10.2
-      language: shell
-      before_install:
-        - pip3 install virtualenv
-        - virtualenv -p $(which python3) ~venvpy3
-        - source ~venvpy3/bin/activate
-      <<: *fleet_install_tasks
-      <<: *fleet_script_tasks
-      after_success:
-        - deactivate
-    
-    - name: "Python 3.7.5 on macOS xcode9.4 "
-      os: osx
-      osx_image: xcode9.4
-      language: shell
-      before_install:
-        - pip3 install virtualenv
-        - virtualenv -p $(which python3) ~venvpy3
-        - source ~venvpy3/bin/activate
-      <<: *fleet_install_tasks
-      <<: *fleet_script_tasks
-      after_success:
-        - deactivate
+after_success:
+  - deactivate
