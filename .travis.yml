@@ -19,9 +19,6 @@ matrix:
   fast_finish: true
   include:
 
-
-# =============================================macOS=============================================
-
     #The default backend on macOS is hyperkit, wrapping Apple’s Hypervisor.framework
     #You need macOS Yosemite, version 10.10.3 or later installed on a 2010 or newer Mac
     #https://docs.travis-ci.com/user/reference/osx/#macos-version
@@ -49,30 +46,43 @@ matrix:
 
 
 
-
-
-# # # #   # =============================================windows=============================================
-#
-# #Multipass defaults to using Hyper-V as it’s virtualization provider
-# # https://multipass.run/docs/installing-on-windows
-# #https://github.com/canonical/multipass/releases
-# #https://github.com/canonical/multipass
-#     - name: "multipass  Python 3.8 on Windows"
-#       os: windows
-#       language: shell
-#       env:
-#         - PATH=/c/Python38:/c/Python38/Scripts:$PATH
-#       before_install:
-#         - choco install python --version 3.8.1
-#         - pip install virtualenv
-#         - virtualenv $HOME/venv
-#         - source $HOME/venv/Scripts/activate
-#       <<: *fleet_install_tasks
-#       <<: *fleet_script_tasks
-#       script:
-#         # - echo "choco install multipass" #- multipass (exited -1) - Error while running 'C:\ProgramData\chocolatey\lib\multipass\tools\chocolateyinstall.ps1'
-#         - choco install wget
-#         - wget https://github.com/canonical/multipass/releases/download/v1.2.1/multipass-1.2.1+win-win64.exe
-#         - dir
-#       after_success:
-#         - deactivate
+    - name: "Python 2.7.17 on macOS xcode10.2"
+      os: osx
+      osx_image: xcode10.2
+      language: shell
+      before_install:
+        - pip install virtualenv
+        - virtualenv -p $(which python2) ~venvpy2
+        - source ~venvpy2/bin/activate
+      <<: *fleet_install_tasks
+      <<: *fleet_script_tasks
+      after_success:
+        - deactivate
+    
+        
+    
+    - name: "Python 3.7.5 on macOS xcode10.2"
+      os: osx
+      osx_image: xcode10.2
+      language: shell
+      before_install:
+        - pip3 install virtualenv
+        - virtualenv -p $(which python3) ~venvpy3
+        - source ~venvpy3/bin/activate
+      <<: *fleet_install_tasks
+      <<: *fleet_script_tasks
+      after_success:
+        - deactivate
+    
+    - name: "Python 3.7.5 on macOS xcode9.4 "
+      os: osx
+      osx_image: xcode9.4
+      language: shell
+      before_install:
+        - pip3 install virtualenv
+        - virtualenv -p $(which python3) ~venvpy3
+        - source ~venvpy3/bin/activate
+      <<: *fleet_install_tasks
+      <<: *fleet_script_tasks
+      after_success:
+        - deactivate
