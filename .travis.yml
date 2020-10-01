@@ -19,11 +19,6 @@ matrix:
   fast_finish: true
   include:
 
-    #The default backend on macOS is hyperkit, wrapping Apple’s Hypervisor.framework
-    #You need macOS Yosemite, version 10.10.3 or later installed on a 2010 or newer Mac
-    #https://docs.travis-ci.com/user/reference/osx/#macos-version
-    # https://multipass.run/docs/installing-on-macos
-    # https://brew.sh/
     - name: "multipass on macOS 10.15.4 osx xcode11.5"
       os: osx
       osx_image: #installer: Error - Your CPU does not have the features necessary for Multipass. Installation cannot proceed
@@ -31,7 +26,6 @@ matrix:
       addons:
         homebrew:
           casks:
-          - dotnet-sdk
           - multipass
           packages:
           - beanstalk
@@ -44,9 +38,6 @@ matrix:
       <<: *fleet_install_tasks
       <<: *fleet_script_tasks
       script:
-        # - /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-        # - brew cask install multipass
-        # - multipass version
         - brew list --versions
       after_success:
         # - brew cask uninstall multipass
@@ -54,12 +45,11 @@ matrix:
 
     - name: "Python 3.7.5 on macOS 10.15.5 osx xcode12u"
       os: osx
-      osx_image: #installer: Error - Your CPU does not have the features necessary for Multipass. Installation cannot proceed
+      osx_image: 
         - xcode12u
       addons:
         homebrew:
           casks:
-          - dotnet-sdk
           - multipass
           packages:
           - beanstalk
@@ -69,8 +59,10 @@ matrix:
         - pip3 install virtualenv
         - virtualenv -p $(which python3) ~venvpy3
         - source ~venvpy3/bin/activate
-      <<: *fleet_install_tasks
-      <<: *fleet_script_tasks
+        - python --version
+        - pip install -r requirements.txt
+      # <<: *fleet_install_tasks
+      # <<: *fleet_script_tasks
       script:
         - brew list --versions
       after_success:

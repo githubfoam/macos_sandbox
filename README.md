@@ -10,4 +10,6 @@ Travis (.com) feature vertical branch:
 
 The macOS Build Environment
 https://docs.travis-ci.com/user/reference/osx/#macos-version
+
+https://brew.sh/
 ~~~
