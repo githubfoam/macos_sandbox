@@ -72,9 +72,6 @@ matrix:
       <<: *fleet_install_tasks
       <<: *fleet_script_tasks
       script:
-        # - /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-        # - brew cask install multipass
-        # - multipass version
         - brew list --versions
       after_success:
         # - brew cask uninstall multipass
