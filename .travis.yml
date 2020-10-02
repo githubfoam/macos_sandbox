@@ -49,6 +49,7 @@ matrix:
         - brew list --versions
         # Compiling from git checkout
         - git clone https://github.com/PowerDNS/pdns.git
+        - cd pdns/pdns/recursordist/
         - ./configure --with-lua PKG_CONFIG_PATH=/usr/local/opt/openssl/lib/pkgconfig
         - make -j4
       after_success:
