@@ -55,10 +55,10 @@ matrix:
         - pip install -r requirements.txt
       script:
         - git clone https://github.com/zentralopensource/zentral
-        - docker-compose up -d #Build and launch all the containers in the background:
-        - docker-compose logs -f --tail=100 web #watch the web container logs
+        - sudo docker-compose up -d #Build and launch all the containers in the background:
+        - sudo docker-compose logs -f --tail=100 web #watch the web container logs
         # Create a Zentral superuser
-        - docker-compose run --rm web createuser --superuser henry henry@zentral.pro
+        - sudo docker-compose run --rm web createuser --superuser henry henry@zentral.pro
       after_success:
         - deactivate 
     # argocd
