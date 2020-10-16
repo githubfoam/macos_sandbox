@@ -21,10 +21,12 @@ matrix:
 
 # https://santa.readthedocs.io/en/latest/development/building/
 # https://santa.dev/development/building.html
-    - name: "deploy santa wo homebrew on macOS 10.15.5 osx xcode12u"
+    - name: "build santa wo homebrew on macOS 10.15.5 osx xcode12u"
       os: osx
-      osx_image: 
-        - xcode12u
+      osx_image:
+        - xcode12.2 #macOS 10.15.7
+        - xcode12u #macOS 10.15.5
+        - xcode12 #macOS 10.15.7
       addons:
         homebrew:
           packages:
@@ -40,6 +42,9 @@ matrix:
       script:
       - git clone https://github.com/google/santa && cd santa 
       - sudo bazel build //Source/santa_driver -c opt #Build a release (optimized) version of Santa
+      - sudo santactl sync
+      # check the SHA-265 for Firefox.app
+      # - santactl binaryinfo /Applications/Firefox.app
       after_success:
         - deactivate
 
@@ -61,6 +66,24 @@ matrix:
         - sudo docker-compose run --rm web createuser --superuser henry henry@zentral.pro
       after_success:
         - deactivate 
+
+# https://github.com/groob/moroz
+    - name: "build moroz - bionic"
+      dist: bionic
+      language: python
+      python: 3.7
+      before_install:
+        - pip3 install virtualenv
+        - virtualenv -p $(which python3) ~venvpy3
+        - source ~venvpy3/bin/activate
+        - pip install -r requirements.txt
+      script:
+        - git clone https://github.com/groob/moroz.git
+        - cd cmd/moroz &&  sudo go build
+      after_success:
+        - deactivate 
+
+
     # argocd
     # https://argoproj.github.io/argo-cd/cli_installation/
     # - name: "deploy argocd w homebrew on macOS 10.15.5 osx xcode12u"
