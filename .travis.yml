@@ -28,7 +28,7 @@ matrix:
       addons:
         homebrew:
           packages:
-          - argocd 
+          - bazel 
           update: true
       language: shell
       before_install:
@@ -38,12 +38,29 @@ matrix:
         - python --version
         - pip install -r requirements.txt
       script:
-      - git clone https://github.com/google/santa
-      - cd santa && git checkout 0.9.33
+      - git clone https://github.com/google/santa && cd santa 
       - sudo bazel build //Source/santa_driver -c opt #Build a release (optimized) version of Santa
       after_success:
         - deactivate
 
+# https://github.com/zentralopensource/zentral/wiki/Docker-deployment
+    - name: "deploy zentral - bionic"
+      dist: bionic
+      language: python
+      python: 3.7
+      before_install:
+        - pip3 install virtualenv
+        - virtualenv -p $(which python3) ~venvpy3
+        - source ~venvpy3/bin/activate
+        - pip install -r requirements.txt
+      script:
+        - git clone https://github.com/zentralopensource/zentral
+        - docker-compose up -d #Build and launch all the containers in the background:
+        - docker-compose logs -f --tail=100 web #watch the web container logs
+        # Create a Zentral superuser
+        - docker-compose run --rm web createuser --superuser henry henry@zentral.pro
+      after_success:
+        - deactivate 
     # argocd
     # https://argoproj.github.io/argo-cd/cli_installation/
     # - name: "deploy argocd w homebrew on macOS 10.15.5 osx xcode12u"
