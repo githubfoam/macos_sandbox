@@ -21,12 +21,12 @@ matrix:
 
 # https://santa.readthedocs.io/en/latest/development/building/
 # https://santa.dev/development/building.html
-    - name: "build santa wo homebrew on macOS 10.15.5 osx xcode12u"
+    - name: "build santa wo homebrew on macOS 10.15.7 osx xcode12.2"
       os: osx
       osx_image:
         - xcode12.2 #macOS 10.15.7
-        - xcode12u #macOS 10.15.5
-        - xcode12 #macOS 10.15.7
+        # - xcode12u #macOS 10.15.5
+        # - xcode12 #macOS 10.15.7
       addons:
         homebrew:
           packages:
@@ -62,7 +62,7 @@ matrix:
       script:
         - git clone https://github.com/zentralopensource/zentral && cd zentral
         - sudo docker-compose up -d #Build and launch all the containers in the background:
-        - sudo docker-compose logs -f --tail=100 web #watch the web container logs
+        - sudo docker-compose logs -f --tail=100 web & #watch the web container logs 
         # Create a Zentral superuser
         - sudo docker-compose run --rm web createuser --superuser henry henry@zentral.pro
       after_success:
@@ -80,7 +80,7 @@ matrix:
         - pip install -r requirements.txt
       script:
         - git clone https://github.com/groob/moroz.git
-        - ls
+        - ls moroz
         # - cd groob/cmd/moroz &&  sudo go build
       after_success:
         - deactivate 
