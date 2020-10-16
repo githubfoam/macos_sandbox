@@ -42,7 +42,8 @@ matrix:
       script:
       - git clone https://github.com/google/santa && cd santa 
       - sudo bazel build //Source/santa_driver -c opt #Build a release (optimized) version of Santa
-      - sudo santactl sync
+      - ls 
+      # - sudo santactl sync
       # check the SHA-265 for Firefox.app
       # - santactl binaryinfo /Applications/Firefox.app
       after_success:
@@ -59,7 +60,7 @@ matrix:
         - source ~venvpy3/bin/activate
         - pip install -r requirements.txt
       script:
-        - git clone https://github.com/zentralopensource/zentral
+        - git clone https://github.com/zentralopensource/zentral && cd zentral
         - sudo docker-compose up -d #Build and launch all the containers in the background:
         - sudo docker-compose logs -f --tail=100 web #watch the web container logs
         # Create a Zentral superuser
@@ -79,7 +80,8 @@ matrix:
         - pip install -r requirements.txt
       script:
         - git clone https://github.com/groob/moroz.git
-        - cd cmd/moroz &&  sudo go build
+        - ls
+        # - cd groob/cmd/moroz &&  sudo go build
       after_success:
         - deactivate 
 
