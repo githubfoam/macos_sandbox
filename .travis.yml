@@ -19,22 +19,16 @@ matrix:
   fast_finish: true
   include:
 
-    # PowerDNS Recursor
-    # https://github.com/PowerDNS/pdns/blob/master/pdns/recursordist/README.md
-    - name: "build PowerDNS Recursor on macOS 10.15.5 osx xcode12u"
+# https://santa.readthedocs.io/en/latest/development/building/
+# https://santa.dev/development/building.html
+    - name: "deploy santa wo homebrew on macOS 10.15.5 osx xcode12u"
       os: osx
-      osx_image: #installer: Error - Your CPU does not have the features necessary for Multipass. Installation cannot proceed
+      osx_image: 
         - xcode12u
       addons:
         homebrew:
-          casks:
-          - multipass
           packages:
-          - boost 
-          - lua 
-          - pkg-config
-          - ragel 
-          - openssl
+          - argocd 
           update: true
       language: shell
       before_install:
@@ -43,19 +37,97 @@ matrix:
         - source ~venvpy3/bin/activate
         - python --version
         - pip install -r requirements.txt
-      # <<: *fleet_install_tasks
-      # <<: *fleet_script_tasks
       script:
-        - brew list --versions
-        # Compiling from git checkout
-        - git clone https://github.com/PowerDNS/pdns.git
-        - cd pdns/pdns/recursordist/
-        - ls -l
-        # - ./configure --with-lua PKG_CONFIG_PATH=/usr/local/opt/openssl/lib/pkgconfig
-        # - make -j4
+      - git clone https://github.com/google/santa
+      - cd santa && git checkout 0.9.33
+      - sudo bazel build //Source/santa_driver -c opt #Build a release (optimized) version of Santa
       after_success:
-        # - brew cask uninstall multipass
         - deactivate
+
+    # argocd
+    # https://argoproj.github.io/argo-cd/cli_installation/
+    # - name: "deploy argocd w homebrew on macOS 10.15.5 osx xcode12u"
+    #   os: osx
+    #   osx_image: #installer: Error - Your CPU does not have the features necessary for Multipass. Installation cannot proceed
+    #     - xcode12u
+    #   addons:
+    #     homebrew:
+    #       packages:
+    #       - argocd 
+    #       update: true
+    #   language: shell
+    #   before_install:
+    #     - pip3 install virtualenv
+    #     - virtualenv -p $(which python3) ~venvpy3
+    #     - source ~venvpy3/bin/activate
+    #     - python --version
+    #     - pip install -r requirements.txt
+    #   # script:
+    #   after_success:
+    #     - deactivate
+
+    # argocd
+    # https://argoproj.github.io/argo-cd/cli_installation/
+    # - name: "deploy argocd wo homebrew on macOS 10.15.5 osx xcode12u"
+    #   os: osx
+    #   osx_image: #installer: Error - Your CPU does not have the features necessary for Multipass. Installation cannot proceed
+    #     - xcode12u
+    #   # addons:
+    #   #   homebrew:
+    #   #     packages:
+    #   #     - argocd 
+    #   #     update: true
+    #   language: shell
+    #   before_install:
+    #     - pip3 install virtualenv
+    #     - virtualenv -p $(which python3) ~venvpy3
+    #     - source ~venvpy3/bin/activate
+    #     - python --version
+    #     - pip install -r requirements.txt
+    #   script:
+    #     - VERSION=$(curl --silent "https://api.github.com/repos/argoproj/argo-cd/releases/latest" | grep '"tag_name"' | sed -E 's/.*"([^"]+)".*/\1/')
+    #     - curl -sSL -o /usr/local/bin/argocd https://github.com/argoproj/argo-cd/releases/download/$VERSION/argocd-darwin-amd64
+    #     - chmod +x /usr/local/bin/argocd
+    #   after_success:
+    #     - deactivate
+
+    # PowerDNS Recursor
+    # https://github.com/PowerDNS/pdns/blob/master/pdns/recursordist/README.md
+    # - name: "build PowerDNS Recursor on macOS 10.15.5 osx xcode12u"
+    #   os: osx
+    #   osx_image: #installer: Error - Your CPU does not have the features necessary for Multipass. Installation cannot proceed
+    #     - xcode12u
+    #   addons:
+    #     homebrew:
+    #       casks:
+    #       - multipass
+    #       packages:
+    #       - boost 
+    #       - lua 
+    #       - pkg-config
+    #       - ragel 
+    #       - openssl
+    #       update: true
+    #   language: shell
+    #   before_install:
+    #     - pip3 install virtualenv
+    #     - virtualenv -p $(which python3) ~venvpy3
+    #     - source ~venvpy3/bin/activate
+    #     - python --version
+    #     - pip install -r requirements.txt
+    #   # <<: *fleet_install_tasks
+    #   # <<: *fleet_script_tasks
+    #   script:
+    #     - brew list --versions
+    #     # Compiling from git checkout
+    #     - git clone https://github.com/PowerDNS/pdns.git
+    #     - cd pdns/pdns/recursordist/
+    #     - ls -l
+    #     # - ./configure --with-lua PKG_CONFIG_PATH=/usr/local/opt/openssl/lib/pkgconfig
+    #     # - make -j4
+    #   after_success:
+    #     # - brew cask uninstall multipass
+    #     - deactivate
 
     # #The default backend on macOS is hyperkit, wrapping Apple’s Hypervisor.framework
     # #You need macOS Yosemite, version 10.10.3 or later installed on a 2010 or newer Mac
