@@ -81,7 +81,7 @@ matrix:
       script:
         - git clone https://github.com/groob/moroz.git
         - ls moroz
-        # - cd groob/cmd/moroz &&  sudo go build
+        - cd cmd/moroz &&  sudo go build
       after_success:
         - deactivate 
 
