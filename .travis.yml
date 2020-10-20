@@ -19,14 +19,31 @@ matrix:
   fast_finish: true
   include:
 
-# https://santa.readthedocs.io/en/latest/development/building/
-# https://santa.dev/development/building.html
-    - name: "build santa wo homebrew on macOS 10.15.7 osx xcode12.2"
+    - name: "deploy Grafana InfluxDB w homebrew on macOS 10.15.7 osx xcode12.2"
       os: osx
       osx_image:
         - xcode12.2 #macOS 10.15.7
-        # - xcode12u #macOS 10.15.5
-        # - xcode12 #macOS 10.15.7
+      addons:
+        homebrew:
+          packages:
+          - helm 
+          update: true
+      language: shell
+      before_install:
+        - pip3 install virtualenv
+        - virtualenv -p $(which python3) ~venvpy3
+        - source ~venvpy3/bin/activate
+        - python --version
+        - pip install -r requirements.txt
+      script:
+      - ls 
+      after_success:
+        - deactivate
+
+    - name: "deploy Grafana InfluxDB wo homebrew on macOS 10.15.7 osx xcode12.2"
+      os: osx
+      osx_image:
+        - xcode12.2 #macOS 10.15.7
       addons:
         homebrew:
           packages:
@@ -40,51 +57,79 @@ matrix:
         - python --version
         - pip install -r requirements.txt
       script:
-      - git clone https://github.com/google/santa && cd santa 
-      - sudo bazel build //Source/santa_driver -c opt #Build a release (optimized) version of Santa
-      - ls 
-      # - sudo santactl sync
-      # check the SHA-265 for Firefox.app
-      # - santactl binaryinfo /Applications/Firefox.app
+      - brew install helm
+      
       after_success:
         - deactivate
 
-# https://github.com/zentralopensource/zentral/wiki/Docker-deployment
-    - name: "deploy zentral - bionic"
-      dist: bionic
-      language: python
-      python: 3.7
-      before_install:
-        - pip3 install virtualenv
-        - virtualenv -p $(which python3) ~venvpy3
-        - source ~venvpy3/bin/activate
-        - pip install -r requirements.txt
-      script:
-        - git clone https://github.com/zentralopensource/zentral && cd zentral
-        - sudo docker-compose up -d #Build and launch all the containers in the background:
-        - sudo docker-compose logs -f --tail=100 web & #watch the web container logs 
-        # Create a Zentral superuser
-        - sudo docker-compose run --rm web createuser --superuser henry henry@zentral.pro
-      after_success:
-        - deactivate 
+################# santa testing #################
+# https://santa.readthedocs.io/en/latest/development/building/
+# https://santa.dev/development/building.html
+#     - name: "build santa wo homebrew on macOS 10.15.7 osx xcode12.2"
+#       os: osx
+#       osx_image:
+#         - xcode12.2 #macOS 10.15.7
+#         # - xcode12u #macOS 10.15.5
+#         # - xcode12 #macOS 10.15.7
+#       addons:
+#         homebrew:
+#           packages:
+#           - bazel 
+#           update: true
+#       language: shell
+#       before_install:
+#         - pip3 install virtualenv
+#         - virtualenv -p $(which python3) ~venvpy3
+#         - source ~venvpy3/bin/activate
+#         - python --version
+#         - pip install -r requirements.txt
+#       script:
+#       - git clone https://github.com/google/santa && cd santa 
+#       - sudo bazel build //Source/santa_driver -c opt #Build a release (optimized) version of Santa
+#       - ls 
+#       # - sudo santactl sync
+#       # check the SHA-265 for Firefox.app
+#       # - santactl binaryinfo /Applications/Firefox.app
+#       after_success:
+#         - deactivate
 
-# https://github.com/groob/moroz
-    - name: "build moroz - bionic"
-      dist: bionic
-      language: python
-      python: 3.7
-      before_install:
-        - pip3 install virtualenv
-        - virtualenv -p $(which python3) ~venvpy3
-        - source ~venvpy3/bin/activate
-        - pip install -r requirements.txt
-      script:
-        - git clone https://github.com/groob/moroz.git
-        - ls moroz
-        - cd cmd/moroz &&  sudo go build
-      after_success:
-        - deactivate 
+# # https://github.com/zentralopensource/zentral/wiki/Docker-deployment
+#     - name: "deploy zentral - bionic"
+#       dist: bionic
+#       language: python
+#       python: 3.7
+#       before_install:
+#         - pip3 install virtualenv
+#         - virtualenv -p $(which python3) ~venvpy3
+#         - source ~venvpy3/bin/activate
+#         - pip install -r requirements.txt
+#       script:
+#         - git clone https://github.com/zentralopensource/zentral && cd zentral
+#         - sudo docker-compose up -d #Build and launch all the containers in the background:
+#         - sudo docker-compose logs -f --tail=100 web & #watch the web container logs 
+#         # Create a Zentral superuser
+#         - sudo docker-compose run --rm web createuser --superuser henry henry@zentral.pro
+#       after_success:
+#         - deactivate 
 
+# # https://github.com/groob/moroz
+#     - name: "build moroz - bionic"
+#       dist: bionic
+#       language: python
+#       python: 3.7
+#       before_install:
+#         - pip3 install virtualenv
+#         - virtualenv -p $(which python3) ~venvpy3
+#         - source ~venvpy3/bin/activate
+#         - pip install -r requirements.txt
+#       script:
+#         - git clone https://github.com/groob/moroz.git
+#         - ls moroz
+#         - cd cmd/moroz &&  sudo go build
+#       after_success:
+#         - deactivate 
+
+################# santa testing #################
 
     # argocd
     # https://argoproj.github.io/argo-cd/cli_installation/
