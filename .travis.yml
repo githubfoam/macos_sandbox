@@ -20,6 +20,55 @@ matrix:
   include:
 
 # https://github.com/appium/python-client
+    - name: "deploy Appium Python Client from source via PyPi w homebrew on macOS 10.15.7 osx xcode12.2"
+      os: osx
+      osx_image:
+        - xcode12.2 #macOS 10.15.7
+      addons:
+        homebrew:
+          packages:
+          - python
+          - git
+          - tar
+          update: true
+      language: shell
+      before_install:
+        - pip3 install virtualenv
+        - virtualenv -p $(which python3) ~venvpy3
+        - source ~venvpy3/bin/activate
+        - python --version
+        - pip install -r requirements.txt
+      script:
+      - tar -xvf Appium-Python-Client-1.0.2.tar.gz
+      - cd Appium-Python-Client-1.0.2
+      - python setup.py install
+      after_success:
+        - deactivate
+
+# https://github.com/appium/python-client
+    - name: "deploy Appium Python Client from PyPi w homebrew on macOS 10.15.7 osx xcode12.2"
+      os: osx
+      osx_image:
+        - xcode12.2 #macOS 10.15.7
+      addons:
+        homebrew:
+          packages:
+          - python
+          - git
+          update: true
+      language: shell
+      before_install:
+        - pip3 install virtualenv
+        - virtualenv -p $(which python3) ~venvpy3
+        - source ~venvpy3/bin/activate
+        - python --version
+        - pip install -r requirements.txt
+      script:
+      - pip install Appium-Python-Client
+      after_success:
+        - deactivate
+
+# https://github.com/appium/python-client
     - name: "deploy Appium Python Client from source via GitHub w homebrew on macOS 10.15.7 osx xcode12.2"
       os: osx
       osx_image:
