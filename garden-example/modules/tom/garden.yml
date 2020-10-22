@@ -1,0 +1,19 @@
+module:
+  name: tom
+  description: Tom Service - the Go edition
+  type: container
+  services:
+    - name: tom-service
+      ports:
+        - name: http
+          containerPort: 8080
+          servicePort: 80
+      healthCheck:
+        httpGet:
+          path: /tom
+          port: http
+      ingresses:
+        - path: /tom
+          port: http
+      dependencies:
+        - mate-service

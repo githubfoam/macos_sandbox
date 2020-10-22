@@ -44,7 +44,7 @@ matrix:
       - brew upgrade carthage
       - gem install cocoapods
       - pod repo update
-      - pod install
+      # - pod install #No `Podfile' found in the project directory
       - appium &
       after_success:
         - deactivate
@@ -129,36 +129,64 @@ matrix:
     #     - deactivate
 
 # https://github.com/gardener/gardener/blob/master/docs/development/local_setup.md
-    # - name: "deploy gardener w homebrew on macOS 10.15.7 osx xcode12.2"
-    #   os: osx
-    #   osx_image:
-    #     - xcode12.2 #macOS 10.15.7
-    #   addons:
-    #     homebrew:
-    #       packages:
-    #       - golang
-    #       - kubernetes-cli
-    #       - kubernetes-helm
-    #       - git 
-    #       - openvpn 
-    #       - minikube
-    #       - iproute2mac
-    #       - jq
-    #       - coreutils gnu-sed
-    #       update: true
-    #   language: shell
-    #   before_install:
-    #     - pip3 install virtualenv
-    #     - virtualenv -p $(which python3) ~venvpy3
-    #     - source ~venvpy3/bin/activate
-    #     - python --version
-    #     - pip install -r requirements.txt
-    #   script:
-    #   - export PATH=$(brew --prefix openvpn)/sbin:$PATH
-    #   - minikube config set embed-certs true
-    #   - go get -u github.com/bronze1man/yaml2json
-    #   after_success:
-    #     - deactivate
+    - name: "deploy gardener w homebrew on macOS 10.15.7 osx xcode12.2"
+      os: osx
+      osx_image:
+        - xcode12.2 #macOS 10.15.7
+      addons:
+        homebrew:
+          packages:
+          - golang
+          - kubernetes-cli
+          - kubernetes-helm
+          - git 
+          - openvpn 
+          - minikube
+          - iproute2mac
+          - jq
+          - coreutils gnu-sed
+          update: true
+      language: shell
+      before_install:
+        - pip3 install virtualenv
+        - virtualenv -p $(which python3) ~venvpy3
+        - source ~venvpy3/bin/activate
+        - python --version
+        - pip install -r requirements.txt
+      script:
+      - export PATH=$(brew --prefix openvpn)/sbin:$PATH
+      - minikube config set embed-certs true
+      - go get -u github.com/bronze1man/yaml2json
+      after_success:
+        - deactivate
+
+# https://github.com/garden-io/garden
+    - name: "deploy garden w homebrew on macOS 10.15.7 osx xcode12.2"
+      os: osx
+      osx_image:
+        - xcode12.2 #macOS 10.15.7
+      addons:
+        homebrew:
+          taps: garden-io/garden
+          packages:
+          - garden-cli
+          update: true
+      language: shell
+      before_install:
+        - pip3 install virtualenv
+        - virtualenv -p $(which python3) ~venvpy3
+        - source ~venvpy3/bin/activate
+        - python --version
+        - pip install -r requirements.txt
+      script:
+      - garden version
+      - cd garden-example
+      - garden init
+      - garden deploy
+      - curl http://garden-example.local.app.garden/jerry
+      - garden dev
+      after_success:
+        - deactivate
 
     # - name: "deploy Grafana InfluxDB w homebrew on macOS 10.15.7 osx xcode12.2"
     #   os: osx

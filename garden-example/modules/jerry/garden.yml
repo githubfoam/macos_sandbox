@@ -1,0 +1,19 @@
+module:
+  name: jerry
+  description: Jerry Service - the Ruby edition
+  type: container
+  services:
+    - name: jerry-service
+      ports:
+        - name: http
+          containerPort: 8080
+          servicePort: 80
+      healthCheck:
+        httpGet:
+          path: /jerry
+          port: http
+      ingresses:
+        - path: /jerry
+          port: http
+        - path: /folks
+          port: http
