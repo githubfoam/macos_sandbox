@@ -38,7 +38,7 @@ matrix:
         - source ~venvpy3/bin/activate
         - python --version
         - pip install -r requirements.txt
-        - rvm --default use 2.4.5
+        - rvm install "ruby-2.4.5"
       script:
       - npm install -g appium
       - brew upgrade carthage
@@ -49,81 +49,84 @@ matrix:
       after_success:
         - deactivate
 
+# TESTED OK
 # https://github.com/appium/python-client
-    - name: "deploy Appium Python Client from source via PyPi w homebrew on macOS 10.15.7 osx xcode12.2"
-      os: osx
-      osx_image:
-        - xcode12.2 #macOS 10.15.7
-      addons:
-        homebrew:
-          packages:
-          - python
-          - git
-          - tar
-          update: true
-      language: shell
-      before_install:
-        - pip3 install virtualenv
-        - virtualenv -p $(which python3) ~venvpy3
-        - source ~venvpy3/bin/activate
-        - python --version
-        - pip install -r requirements.txt
-      script:
-      - wget https://files.pythonhosted.org/packages/21/ca/3261b5da5b6851ea5297f44b2dc7f3167f00a7ce3e99907b49bf69c56360/Appium-Python-Client-1.0.2.tar.gz
-      - tar -xvf Appium-Python-Client-1.0.2.tar.gz
-      - cd Appium-Python-Client-1.0.2
-      - python setup.py install
-      after_success:
-        - deactivate
+    # - name: "deploy Appium Python Client from source via PyPi w homebrew on macOS 10.15.7 osx xcode12.2"
+    #   os: osx
+    #   osx_image:
+    #     - xcode12.2 #macOS 10.15.7
+    #   addons:
+    #     homebrew:
+    #       packages:
+    #       - python
+    #       - git
+    #       - tar
+    #       update: true
+    #   language: shell
+    #   before_install:
+    #     - pip3 install virtualenv
+    #     - virtualenv -p $(which python3) ~venvpy3
+    #     - source ~venvpy3/bin/activate
+    #     - python --version
+    #     - pip install -r requirements.txt
+    #   script:
+    #   - wget https://files.pythonhosted.org/packages/21/ca/3261b5da5b6851ea5297f44b2dc7f3167f00a7ce3e99907b49bf69c56360/Appium-Python-Client-1.0.2.tar.gz
+    #   - tar -xvf Appium-Python-Client-1.0.2.tar.gz
+    #   - cd Appium-Python-Client-1.0.2
+    #   - python setup.py install
+    #   after_success:
+    #     - deactivate
 
+# TESTED OK
 # https://github.com/appium/python-client
-    - name: "deploy Appium Python Client from PyPi w homebrew on macOS 10.15.7 osx xcode12.2"
-      os: osx
-      osx_image:
-        - xcode12.2 #macOS 10.15.7
-      addons:
-        homebrew:
-          packages:
-          - python
-          - git
-          update: true
-      language: shell
-      before_install:
-        - pip3 install virtualenv
-        - virtualenv -p $(which python3) ~venvpy3
-        - source ~venvpy3/bin/activate
-        - python --version
-        - pip install -r requirements.txt
-      script:
-      - pip install Appium-Python-Client
-      after_success:
-        - deactivate
+    # - name: "deploy Appium Python Client from PyPi w homebrew on macOS 10.15.7 osx xcode12.2"
+    #   os: osx
+    #   osx_image:
+    #     - xcode12.2 #macOS 10.15.7
+    #   addons:
+    #     homebrew:
+    #       packages:
+    #       - python
+    #       - git
+    #       update: true
+    #   language: shell
+    #   before_install:
+    #     - pip3 install virtualenv
+    #     - virtualenv -p $(which python3) ~venvpy3
+    #     - source ~venvpy3/bin/activate
+    #     - python --version
+    #     - pip install -r requirements.txt
+    #   script:
+    #   - pip install Appium-Python-Client
+    #   after_success:
+    #     - deactivate
 
+# TESTED OK
 # https://github.com/appium/python-client
-    - name: "deploy Appium Python Client from source via GitHub w homebrew on macOS 10.15.7 osx xcode12.2"
-      os: osx
-      osx_image:
-        - xcode12.2 #macOS 10.15.7
-      addons:
-        homebrew:
-          packages:
-          - python
-          - git
-          update: true
-      language: shell
-      before_install:
-        - pip3 install virtualenv
-        - virtualenv -p $(which python3) ~venvpy3
-        - source ~venvpy3/bin/activate
-        - python --version
-        - pip install -r requirements.txt
-      # script:
-      # Are you sure you want to continue connecting (yes/no/[fingerprint])? 
-      # - git clone git@github.com:appium/python-client.git
-      # - cd python-client
-      # - python setup.py install
-      after_success:
-        - deactivate
+    # - name: "deploy Appium Python Client from source via GitHub w homebrew on macOS 10.15.7 osx xcode12.2"
+    #   os: osx
+    #   osx_image:
+    #     - xcode12.2 #macOS 10.15.7
+    #   addons:
+    #     homebrew:
+    #       packages:
+    #       - python
+    #       - git
+    #       update: true
+    #   language: shell
+    #   before_install:
+    #     - pip3 install virtualenv
+    #     - virtualenv -p $(which python3) ~venvpy3
+    #     - source ~venvpy3/bin/activate
+    #     - python --version
+    #     - pip install -r requirements.txt
+    #   # script:
+    #   # Are you sure you want to continue connecting (yes/no/[fingerprint])? 
+    #   # - git clone git@github.com:appium/python-client.git
+    #   # - cd python-client
+    #   # - python setup.py install
+    #   after_success:
+    #     - deactivate
 
 # https://github.com/gardener/gardener/blob/master/docs/development/local_setup.md
     # - name: "deploy gardener w homebrew on macOS 10.15.7 osx xcode12.2"
