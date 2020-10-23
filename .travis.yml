@@ -159,16 +159,22 @@ matrix:
     #   after_success:
     #     - deactivate
 
-# https://github.com/garden-io/garden
-    - name: "deploy garden w homebrew on macOS 10.15.7 osx xcode12.2"
+# https://mobsf.github.io/docs/#/installation?id=linuxmac
+# https://mobsf.github.io/docs/#/requirements
+    - name: "deploy Mobile Security Framework (MobSF) w homebrew on macOS 10.15.7 osx xcode12.2"
       os: osx
       osx_image:
         - xcode12.2 #macOS 10.15.7
       addons:
         homebrew:
-          taps: garden-io/garden
+          casks:
+          # https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+          - wkhtmltopdf
+          # taps: garden-io/garden
           packages:
-          - garden-cli
+          - git
+          - python
+          - java           
           update: true
       language: shell
       before_install:
@@ -176,17 +182,43 @@ matrix:
         - virtualenv -p $(which python3) ~venvpy3
         - source ~venvpy3/bin/activate
         - python --version
+        - java -version 
         - pip install -r requirements.txt
       script:
-      - garden version
-      - cd garden-example
-      # - garden init #The command "garden init" exited with 1.
-      - garden deploy #Missing `kind` field in config at garden.yml
-      # curl: (7) Failed to connect to garden-example.local.app.garden port 80: Connection refused
-      # - curl http://garden-example.local.app.garden/jerry
-      # - garden dev #Missing `kind` field in config at garden.yml
+      - git clone https://github.com/MobSF/Mobile-Security-Framework-MobSF.git
+      - cd Mobile-Security-Framework-MobSF
+      - ./setup.sh
       after_success:
         - deactivate
+
+# https://github.com/garden-io/garden
+    # - name: "deploy garden w homebrew on macOS 10.15.7 osx xcode12.2"
+    #   os: osx
+    #   osx_image:
+    #     - xcode12.2 #macOS 10.15.7
+    #   addons:
+    #     homebrew:
+    #       taps: garden-io/garden
+    #       packages:
+    #       - garden-cli
+    #       update: true
+    #   language: shell
+    #   before_install:
+    #     - pip3 install virtualenv
+    #     - virtualenv -p $(which python3) ~venvpy3
+    #     - source ~venvpy3/bin/activate
+    #     - python --version
+    #     - pip install -r requirements.txt
+    #   script:
+    #   - garden version
+    #   - cd garden-example
+    #   # - garden init #The command "garden init" exited with 1.
+    #   - garden deploy #Missing `kind` field in config at garden.yml
+    #   # curl: (7) Failed to connect to garden-example.local.app.garden port 80: Connection refused
+    #   # - curl http://garden-example.local.app.garden/jerry
+    #   # - garden dev #Missing `kind` field in config at garden.yml
+    #   after_success:
+    #     - deactivate
 
     # - name: "deploy Grafana InfluxDB w homebrew on macOS 10.15.7 osx xcode12.2"
     #   os: osx
