@@ -161,21 +161,40 @@ matrix:
 
 # https://mobsf.github.io/docs/#/installation?id=linuxmac
 # https://mobsf.github.io/docs/#/requirements
-    - name: "deploy Mobile Security Framework (MobSF) w homebrew on macOS 10.15.7 osx xcode12.2"
+    # - name: "deploy Mobile Security Framework (MobSF) w homebrew on macOS 10.15.7 osx xcode12.2"
+    #   os: osx
+    #   osx_image:
+    #     - xcode12.2 #macOS 10.15.7
+    #   addons:
+    #     homebrew:
+    #       casks:
+    #       # https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+    #       - wkhtmltopdf
+    #       # taps: garden-io/garden
+    #       packages:
+    #       - git
+    #       - python
+    #       - java           
+    #       update: true
+    #   language: shell
+    #   before_install:
+    #     - pip3 install virtualenv
+    #     - virtualenv -p $(which python3) ~venvpy3
+    #     - source ~venvpy3/bin/activate
+    #     - python --version
+    #     - java -version 
+    #     - pip install -r requirements.txt
+    #   script:
+    #   - git clone https://github.com/MobSF/Mobile-Security-Framework-MobSF.git
+    #   - cd Mobile-Security-Framework-MobSF
+    #   - ./setup.sh
+    #   after_success:
+    #     - deactivate
+
+    - name: "deploy jenkins wo homebrew on macOS 10.15.7 osx xcode12.2"
       os: osx
       osx_image:
         - xcode12.2 #macOS 10.15.7
-      addons:
-        homebrew:
-          casks:
-          # https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
-          - wkhtmltopdf
-          # taps: garden-io/garden
-          packages:
-          - git
-          - python
-          - java           
-          update: true
       language: shell
       before_install:
         - pip3 install virtualenv
@@ -185,9 +204,19 @@ matrix:
         - java -version 
         - pip install -r requirements.txt
       script:
-      - git clone https://github.com/MobSF/Mobile-Security-Framework-MobSF.git
-      - cd Mobile-Security-Framework-MobSF
-      - ./setup.sh
+      - brew doctor
+      - brew cask install java8
+      - brew install jenkins-lts
+      # accessible from anywhere (not just on the local machine)
+      # - sudo nano /usr/local/opt/jenkins-lts/homebrew.mxcl.jenkins-lts.plist
+      # Find this line <string>--httpListenAddress=127.0.0.1</string>
+      # change it to <string>--httpListenAddress=0.0.0.0</string>
+      - brew services start jenkins-lts
+      - brew services status jenkins-lts
+      # - curl http://localhost:8080
+      - cat /Users/administrator/.jenkins/secrets/initialAdminPassword
+      - brew services restart jenkins-lts
+      - brew services status jenkins-lts
       after_success:
         - deactivate
 
