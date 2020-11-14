@@ -19,6 +19,7 @@ matrix:
   fast_finish: true
   include:
 
+# https://docs.travis-ci.com/user/reference/osx/#macos-version
 # https://guide.macports.org/#installing.xcode
     - name: "deploy  MacPorts  on bionic amd64"
       dist: bionic
@@ -31,7 +32,9 @@ matrix:
         - source ~venvpy3/bin/activate
         - pip install -r requirements.txt
       script:
-        - sudo xcode-select --install
+        - echo $PATH
+        - sudo xcode-select --switch /
+        # - sudo xcode-select --install
         - sudo port -v selfupdate
         - export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
         - sudo port install vim
@@ -42,7 +45,7 @@ matrix:
 # if you wish to install multiple copies of MacPorts 
 # or install MacPorts on another OS platform, 
 # you must install MacPorts from the source code.
-    - name: "deploy  MacPorts  on bionic amd64"
+    - name: "deploy  MacPorts from source on bionic amd64"
       dist: bionic
       arch: amd64
       language: python
