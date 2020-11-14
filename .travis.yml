@@ -19,36 +19,59 @@ matrix:
   fast_finish: true
   include:
 
-# TESTED OK
-    - name: "appium w homebrew on macOS 10.15.7 osx xcode12.2"
-      os: osx
-      osx_image:
-        - xcode12.2 #macOS 10.15.7
-      addons:
-        homebrew:
-          packages:
-          - node
-          - python
-          - git
-          - tar
-          update: true
-      language: java
+# https://guide.macports.org/#installing.xcode
+# if you wish to install multiple copies of MacPorts 
+# or install MacPorts on another OS platform, 
+# you must install MacPorts from the source code.
+    - name: "deploy  MacPorts  on bionic amd64"
+      dist: bionic
+      arch: amd64
+      language: python
+      # python: 3.7
       before_install:
         - pip3 install virtualenv
         - virtualenv -p $(which python3) ~venvpy3
         - source ~venvpy3/bin/activate
-        - python --version
         - pip install -r requirements.txt
-        - rvm install "ruby-2.4.5"
       script:
-      - npm install -g appium
-      - brew upgrade carthage
-      - gem install cocoapods
-      - pod repo update
-      # - pod install #No `Podfile' found in the project directory
-      - appium &
+        - curl -O https://distfiles.macports.org/MacPorts/MacPorts-2.6.4.tar.bz2
+        - tar xf MacPorts-2.6.4.tar.bz2 && cd MacPorts-2.6.4/
+        - ./configure
+        - make
+        - sudo make install
       after_success:
         - deactivate
+        
+# TESTED OK
+    # - name: "appium w homebrew on macOS 10.15.7 osx xcode12.2"
+    #   os: osx
+    #   osx_image:
+    #     - xcode12.2 #macOS 10.15.7
+    #   addons:
+    #     homebrew:
+    #       packages:
+    #       - node
+    #       - python
+    #       - git
+    #       - tar
+    #       update: true
+    #   language: java
+    #   before_install:
+    #     - pip3 install virtualenv
+    #     - virtualenv -p $(which python3) ~venvpy3
+    #     - source ~venvpy3/bin/activate
+    #     - python --version
+    #     - pip install -r requirements.txt
+    #     - rvm install "ruby-2.4.5"
+    #   script:
+    #   - npm install -g appium
+    #   - brew upgrade carthage
+    #   - gem install cocoapods
+    #   - pod repo update
+    #   # - pod install #No `Podfile' found in the project directory
+    #   - appium &
+    #   after_success:
+    #     - deactivate
 
 # TESTED OK
 # https://github.com/appium/python-client
