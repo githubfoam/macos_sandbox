@@ -19,81 +19,36 @@ matrix:
   fast_finish: true
   include:
 
-# https://minikube.sigs.k8s.io/docs/start/
-    - name: "deploy minikube wo homebrew on macOS 10.15.7 osx xcode12.2"
-      os: osx
-      osx_image:
-        - xcode12.2 #macOS 10.15.7      
-      language: shell
-      before_install:
-        - pip3 install virtualenv
-        - virtualenv -p $(which python3) ~venvpy3
-        - source ~venvpy3/bin/activate
-        - python --version
-        - pip install -r requirements.txt
-      script:
-      - curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-darwin-amd64
-      - sudo install minikube-darwin-amd64 /usr/local/bin/minikube
-      - which minikube
-      - minikube version
-      after_success:
-        - deactivate
-
-# https://minikube.sigs.k8s.io/docs/start/
-    - name: "deploy minikube w homebrew on macOS 10.15.7 osx xcode12.2"
+# TESTED OK
+    - name: "appium w homebrew on macOS 10.15.7 osx xcode12.2"
       os: osx
       osx_image:
         - xcode12.2 #macOS 10.15.7
       addons:
         homebrew:
           packages:
+          - node
           - python
-          - minikube
-          update: true        
-      language: shell
+          - git
+          - tar
+          update: true
+      language: java
       before_install:
         - pip3 install virtualenv
         - virtualenv -p $(which python3) ~venvpy3
         - source ~venvpy3/bin/activate
         - python --version
         - pip install -r requirements.txt
+        - rvm install "ruby-2.4.5"
       script:
-      # - brew doctor
-      - which minikube
-      - minikube version
+      - npm install -g appium
+      - brew upgrade carthage
+      - gem install cocoapods
+      - pod repo update
+      # - pod install #No `Podfile' found in the project directory
+      - appium &
       after_success:
         - deactivate
-
-# TESTED OK
-    # - name: "appium w homebrew on macOS 10.15.7 osx xcode12.2"
-    #   os: osx
-    #   osx_image:
-    #     - xcode12.2 #macOS 10.15.7
-    #   addons:
-    #     homebrew:
-    #       packages:
-    #       - node
-    #       - python
-    #       - git
-    #       - tar
-    #       update: true
-    #   language: java
-    #   before_install:
-    #     - pip3 install virtualenv
-    #     - virtualenv -p $(which python3) ~venvpy3
-    #     - source ~venvpy3/bin/activate
-    #     - python --version
-    #     - pip install -r requirements.txt
-    #     - rvm install "ruby-2.4.5"
-    #   script:
-    #   - npm install -g appium
-    #   - brew upgrade carthage
-    #   - gem install cocoapods
-    #   - pod repo update
-    #   # - pod install #No `Podfile' found in the project directory
-    #   - appium &
-    #   after_success:
-    #     - deactivate
 
 # TESTED OK
 # https://github.com/appium/python-client
@@ -412,53 +367,6 @@ matrix:
 #         - deactivate 
 
 ################# santa testing #################
-
-    # argocd
-    # https://argoproj.github.io/argo-cd/cli_installation/
-    # - name: "deploy argocd w homebrew on macOS 10.15.5 osx xcode12u"
-    #   os: osx
-    #   osx_image: #installer: Error - Your CPU does not have the features necessary for Multipass. Installation cannot proceed
-    #     - xcode12u
-    #   addons:
-    #     homebrew:
-    #       packages:
-    #       - argocd 
-    #       update: true
-    #   language: shell
-    #   before_install:
-    #     - pip3 install virtualenv
-    #     - virtualenv -p $(which python3) ~venvpy3
-    #     - source ~venvpy3/bin/activate
-    #     - python --version
-    #     - pip install -r requirements.txt
-    #   # script:
-    #   after_success:
-    #     - deactivate
-
-    # argocd
-    # https://argoproj.github.io/argo-cd/cli_installation/
-    # - name: "deploy argocd wo homebrew on macOS 10.15.5 osx xcode12u"
-    #   os: osx
-    #   osx_image: #installer: Error - Your CPU does not have the features necessary for Multipass. Installation cannot proceed
-    #     - xcode12u
-    #   # addons:
-    #   #   homebrew:
-    #   #     packages:
-    #   #     - argocd 
-    #   #     update: true
-    #   language: shell
-    #   before_install:
-    #     - pip3 install virtualenv
-    #     - virtualenv -p $(which python3) ~venvpy3
-    #     - source ~venvpy3/bin/activate
-    #     - python --version
-    #     - pip install -r requirements.txt
-    #   script:
-    #     - VERSION=$(curl --silent "https://api.github.com/repos/argoproj/argo-cd/releases/latest" | grep '"tag_name"' | sed -E 's/.*"([^"]+)".*/\1/')
-    #     - curl -sSL -o /usr/local/bin/argocd https://github.com/argoproj/argo-cd/releases/download/$VERSION/argocd-darwin-amd64
-    #     - chmod +x /usr/local/bin/argocd
-    #   after_success:
-    #     - deactivate
 
     # PowerDNS Recursor
     # https://github.com/PowerDNS/pdns/blob/master/pdns/recursordist/README.md
