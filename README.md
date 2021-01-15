@@ -7,9 +7,12 @@ Travis (.com) feature vertical branch:
 [![Build Status](https://travis-ci.com/githubfoam/macos_sandbox.svg?branch=feature_vertical)](https://travis-ci.com/githubfoam/macos_sandbox)
 
 ~~~
+MacPorts 
+https://www.macports.org/
 
 The macOS Build Environment
 https://docs.travis-ci.com/user/reference/osx/#macos-version
 
 https://brew.sh/
+https://github.com/MobSF/Mobile-Security-Framework-MobSF
 ~~~
