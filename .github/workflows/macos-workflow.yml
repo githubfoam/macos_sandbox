@@ -5,7 +5,7 @@ name: "macOS CI workflow"
 
 on:
   push:
-    branches: [ feature_macos ]
+    branches: [ test ]
 
 
 
