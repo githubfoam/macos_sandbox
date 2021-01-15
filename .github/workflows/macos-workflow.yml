@@ -27,7 +27,9 @@ jobs:
       - name: "brew cask list"
         run:   brew list --cask #Warning: Calling brew cask list is deprecated! Use brew list [--cask] instead.
       - name: "brew list"
-        run: brew list #List all the installed formulas
+        # run: brew list #List all the installed formulas
+        run: brew list --formula #List all the installed formulas
+        # Calling `brew list` to only list formulae is disabled! Use `brew list --formula` instead
       - name: "Get OS X System Version"
         run: sw_vers       
       - name: "Get Mac System Details with system_profiler"
@@ -59,7 +61,9 @@ jobs:
       - name: "brew cask list"
         run:   brew list --cask #Warning: Calling brew cask list is deprecated! Use brew list [--cask] instead.
       - name: "brew list"
-        run: brew list #List all the installed formulas
+        # run: brew list #List all the installed formulas
+        run: brew list --formula #List all the installed formulas
+        # Calling `brew list` to only list formulae is disabled! Use `brew list --formula` instead
       - name: "Get OS X System Version"
         run: sw_vers       
       - name: "Get Mac System Details with system_profiler"
@@ -85,7 +89,9 @@ jobs:
       - name: "brew cask list"
         run:   brew list --cask #Warning: Calling brew cask list is deprecated! Use brew list [--cask] instead.
       - name: "brew list"
-        run: brew list #List all the installed formulas
+        # run: brew list #List all the installed formulas
+        run: brew list --formula #List all the installed formulas
+        # Calling `brew list` to only list formulae is disabled! Use `brew list --formula` instead
       - name: "Get OS X System Version"
         run: sw_vers       
       - name: "Get Mac System Details with system_profiler"
@@ -111,7 +117,9 @@ jobs:
       - name: "brew cask list"
         run:   brew list --cask #Warning: Calling brew cask list is deprecated! Use brew list [--cask] instead.
       - name: "brew list"
-        run: brew list #List all the installed formulas
+        # run: brew list #List all the installed formulas
+        run: brew list --formula #List all the installed formulas
+        # Calling `brew list` to only list formulae is disabled! Use `brew list --formula` instead
       - name: "Get OS X System Version"
         run: sw_vers       
       - name: "Get Mac System Details with system_profiler"
