@@ -38,7 +38,9 @@ jobs:
         run: uname -a    
       - name: "Download and install Docker Community Edition"
         run: |
-          brew cask install docker   
+          #Calling brew cask install is disabled! Use brew install [--cask] instead.  
+          #brew cask install docker 
+          brew --cask install docker   
       - name: "run hello-world"
         run: |
           docker run hello-world                                     
