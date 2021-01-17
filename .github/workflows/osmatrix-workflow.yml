@@ -57,8 +57,8 @@ jobs:
         run: brew --version   #Homebrew 2.5.12   
       - name: "brew cask list"
         run:   brew list --cask #Warning: Calling brew cask list is deprecated! Use brew list [--cask] instead.
-      - name: "brew list"
-        run: brew list #List all the installed formulas
+      - name: "brew list --formula"
+        run: brew list --formula #List all the installed formulas
       - name: "Get OS X System Version"
         run: sw_vers       
       - name: "Get Mac System Details with system_profiler"
@@ -83,8 +83,8 @@ jobs:
         run: brew --version   #Homebrew 2.5.12   
       - name: "brew cask list"
         run:   brew list --cask #Warning: Calling brew cask list is deprecated! Use brew list [--cask] instead.
-      - name: "brew list"
-        run: brew list #List all the installed formulas
+      - name: "brew list --formula"
+        run: brew list --formula #List all the installed formulas
       - name: "Get OS X System Version"
         run: sw_vers       
       - name: "Get Mac System Details with system_profiler"
@@ -109,8 +109,8 @@ jobs:
         run: brew --version   #Homebrew 2.5.12   
       - name: "brew cask list"
         run:   brew list --cask #Warning: Calling brew cask list is deprecated! Use brew list [--cask] instead.
-      - name: "brew list"
-        run: brew list #List all the installed formulas
+      - name: "brew list --formula"
+        run: brew list --formula #List all the installed formulas
       - name: "Get OS X System Version"
         run: sw_vers       
       - name: "Get Mac System Details with system_profiler"
