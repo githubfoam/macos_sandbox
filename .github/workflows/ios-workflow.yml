@@ -23,7 +23,7 @@ jobs:
       - name: "Download the repository hello world project"
         run:   git clone https://github.com/cwalk/Hello-World-iOS && ls -l Hello-World-iOS             
       - name: "Navigate to the project directory"
-        run:   cd "Hello-World-iOS/Hello World/"
+        run:   cd ‘Hello-World-iOS/Hello World/’ 
       - name: "Navigate to the project directory"
         run:   cd Hello-World-iOS/Hello World/        
       - name: "Set Default Scheme"
