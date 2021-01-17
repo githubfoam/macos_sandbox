@@ -20,6 +20,12 @@ jobs:
         uses: actions/checkout@v2   
       - name: "Get OS X System Version"
         run: sw_vers            
+      - name: "Download the repository hello world project"
+        run:   git clone https://github.com/cwalk/Hello-World-iOS              
+      - name: "Navigate to the project directory"
+        run:   cd Hello-World-iOS/Hello World/
+      - name: "Navigate to the project directory"
+        run:   cd Hello-World-iOS/Hello World/        
       - name: "Set Default Scheme"
         run:   scheme_list=$(xcodebuild -list -json | tr -d "\n")      
       # - name: "Set Default Scheme"
