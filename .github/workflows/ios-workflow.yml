@@ -25,9 +25,9 @@ jobs:
       # - name: "Navigate to the project directory"
       #   run:   ls ‘Hello-World-iOS/Hello World/’ 
       - name: "Navigate to the project directory"
-        run:   ls 'Hello-World-iOS/Hello World/'       
-      - name: "Navigate to the project directory"
-        run:   ls “Hello-World-iOS/Hello World/”               
+        run:   cd 'Hello-World-iOS/Hello World/'       
+      # - name: "Navigate to the project directory"
+      #   run:   ls “Hello-World-iOS/Hello World/”               
       - name: "Set Default Scheme"
         run:   scheme_list=$(xcodebuild -list -json | tr -d "\n")      
       # - name: "Set Default Scheme"
