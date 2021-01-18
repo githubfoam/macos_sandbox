@@ -25,9 +25,7 @@ jobs:
       - name: "python --version"
         run:   python --version #Python 2.7.18
       - name: "pip install virtualenv"
-        run:   pip install virtualenv 
-      - name: "virtualenv --version"
-        run:   virtualenv --version                
+        run:   pip install virtualenv               
       - name: "echo $PATH"
         run:   echo $PATH
       - name: "add to $PATH"
