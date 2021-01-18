@@ -26,12 +26,22 @@ jobs:
         run:   python --version #Python 2.7.18
       - name: "pip install virtualenv"
         run:   pip install virtualenv 
-      - name: "virtualenv -p $(which python2) ~venvpython2x"
-        run:   virtualenv -p $(which python2) ~~venvpython2x
-      - name: "source ~venvpython2x/bin/activate"
-        run:   source ~venvpython2x/bin/activate     
-      - name: "source ~venvpython2x/bin/activate"
-        run:   source ~venvpython2x/bin/activate                               
+      - name: "virtualenv --version"
+        run:   virtualenv --version                
+      - name: "echo $PATH"
+        run:   echo $PATH
+      - name: "add to $PATH"
+        run:   export PATH=$PATH:~/Library/Frameworks/Python.framework/Versions/2.7/bin              
+      - name: "echo $PATH"
+        run:   echo $PATH       
+      - name: "virtualenv --version"
+        run:   virtualenv --version         
+      # - name: "virtualenv -p $(which python2) ~venvpython2x"
+      #   run:   virtualenv -p $(which python2) ~~venvpython2x
+      # - name: "source ~venvpython2x/bin/activate"
+      #   run:   source ~venvpython2x/bin/activate     
+      # - name: "source ~venvpython2x/bin/activate"
+      #   run:   source ~venvpython2x/bin/activate                               
   # macos-latest-docker:
   #     name: "macos-latest macos-latest 10.15.7"
   #     runs-on: macos-latest
