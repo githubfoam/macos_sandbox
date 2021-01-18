@@ -30,6 +30,8 @@ jobs:
         run:   echo $PATH
       - name: "add to $PATH"
         run:   export PATH="/Library/Frameworks/Python.framework/Versions/2.7/bin:$PATH"              
+      - name: "source ~/.bash_profile"
+        run:   source ~/.bash_profile
       - name: "echo $PATH"
         run:   echo $PATH       
       - name: "virtualenv --version"
