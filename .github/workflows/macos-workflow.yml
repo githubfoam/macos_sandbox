@@ -23,9 +23,15 @@ jobs:
       - name: "check on brew version"
         run: brew --version   #Homebrew 2.5.12   
       - name: "python --version"
-        run:   python --version
+        run:   python --version #Python 2.7.18
       - name: "pip install virtualenv"
-        run:   pip install virtualenv        
+        run:   pip install virtualenv 
+      - name: "virtualenv -p $(which python2) ~venvpython2x"
+        run:   virtualenv -p $(which python2) ~~venvpython2x
+      - name: "source ~venvpython2x/bin/activate"
+        run:   source ~venvpython2x/bin/activate     
+      - name: "source ~venvpython2x/bin/activate"
+        run:   source ~venvpython2x/bin/activate                               
   # macos-latest-docker:
   #     name: "macos-latest macos-latest 10.15.7"
   #     runs-on: macos-latest
