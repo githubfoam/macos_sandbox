@@ -15,7 +15,7 @@ os matrix
 Travis (.com) dev branch:  
 [![Build Status](https://travis-ci.com/githubfoam/macos_sandbox.svg?branch=master)](https://travis-ci.com/githubfoam/macos_sandbox)  
 
-Travis (.com) feature vertical branch:
+Travis (.com) feature vertical branch:  
 [![Build Status](https://travis-ci.com/githubfoam/macos_sandbox.svg?branch=feature_vertical)](https://travis-ci.com/githubfoam/macos_sandbox)
 
 ~~~
