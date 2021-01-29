@@ -9,7 +9,10 @@ OS matrix with java version
 ![maven CI workflow](https://github.com/githubfoam/macos_sandbox/workflows/maven%20CI%20workflow/badge.svg?branch=master)  
 
 os matrix  
-![ant CI workflow](https://github.com/githubfoam/macos_sandbox/workflows/ant%20CI%20workflow/badge.svg?branch=master)
+![ant CI workflow](https://github.com/githubfoam/macos_sandbox/workflows/ant%20CI%20workflow/badge.svg?branch=master)  
+
+Ubuntu  
+![CMake CI workflow](https://github.com/githubfoam/macos_sandbox/workflows/CMake%20CI%20workflow/badge.svg?branch=master)
 
 
 Travis (.com) dev branch:  
