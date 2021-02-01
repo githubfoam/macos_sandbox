@@ -12,7 +12,10 @@ os matrix
 ![ant CI workflow](https://github.com/githubfoam/macos_sandbox/workflows/ant%20CI%20workflow/badge.svg?branch=master)  
 
 osmatrix    
-![CMake CI workflow](https://github.com/githubfoam/macos_sandbox/workflows/CMake%20CI%20workflow/badge.svg?branch=master)
+![CMake CI workflow](https://github.com/githubfoam/macos_sandbox/workflows/CMake%20CI%20workflow/badge.svg?branch=master)  
+
+Ubuntu  
+![C/C++ CI workflow](https://github.com/githubfoam/macos_sandbox/workflows/C/C++%20CI%20workflow/badge.svg?branch=master)  
 
 
 Travis (.com) dev branch:  
