@@ -11,7 +11,7 @@ OS matrix with java version
 os matrix  
 ![ant CI workflow](https://github.com/githubfoam/macos_sandbox/workflows/ant%20CI%20workflow/badge.svg?branch=master)  
 
-Ubuntu  
+osmatrix    
 ![CMake CI workflow](https://github.com/githubfoam/macos_sandbox/workflows/CMake%20CI%20workflow/badge.svg?branch=master)
 
 
