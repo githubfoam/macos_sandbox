@@ -4,16 +4,6 @@
 
 ![os matrix CI workflow](https://github.com/githubfoam/macos_sandbox/workflows/os%20matrix%20CI%20workflow/badge.svg)  
 
-Publishing using Apache Maven  
-OS matrix with java version  
-![maven CI workflow](https://github.com/githubfoam/macos_sandbox/workflows/maven%20CI%20workflow/badge.svg?branch=master)  
-
-os matrix  
-![ant CI workflow](https://github.com/githubfoam/macos_sandbox/workflows/ant%20CI%20workflow/badge.svg?branch=master)  
-
-osmatrix    
-![CMake CI workflow](https://github.com/githubfoam/macos_sandbox/workflows/CMake%20CI%20workflow/badge.svg?branch=master)  
-
 Travis (.com) dev branch:  
 [![Build Status](https://travis-ci.com/githubfoam/macos_sandbox.svg?branch=master)](https://travis-ci.com/githubfoam/macos_sandbox)  
 
