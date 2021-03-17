@@ -45,6 +45,8 @@ Detect Frida for Android
 https://github.com/darvincisec/DetectFrida
 Android_Emuroot is a Python script that allows granting root privileges on the fly to shells running on Android virtual machines that use google-provided emulator images called Google API Playstore, to help reverse engineers to go deeper into their investigations
 https://github.com/airbus-seclab/android_emuroot
+Mobile application testing toolkit 
+https://github.com/nettitude/scrounger
 ~~~
 ~~~
 GitHub’s official command line tool
