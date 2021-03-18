@@ -29,6 +29,8 @@ cpu_rec is a tool that recognizes cpu instructions in an arbitrary binary file. 
 https://github.com/airbus-seclab/cpu_rec
 Firmware Analysis Tool 
 https://github.com/ReFirmLabs/binwalk
+Burp Suite Community Edition,manual tools for exploring web security. Proxy your HTTPS traffic, edit and repeat requests, decode data
+https://portswigger.net/burp/communitydownload
 ~~~
 AI
 ~~~
