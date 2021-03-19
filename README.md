@@ -31,6 +31,8 @@ Firmware Analysis Tool
 https://github.com/ReFirmLabs/binwalk
 Burp Suite Community Edition,manual tools for exploring web security. Proxy your HTTPS traffic, edit and repeat requests, decode data
 https://portswigger.net/burp/communitydownload
+Hetty is an HTTP toolkit for security research
+https://github.com/dstotijn/hetty
 ~~~
 AI
 ~~~
