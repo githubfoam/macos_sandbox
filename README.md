@@ -33,6 +33,8 @@ Burp Suite Community Edition,manual tools for exploring web security. Proxy your
 https://portswigger.net/burp/communitydownload
 Hetty is an HTTP toolkit for security research
 https://github.com/dstotijn/hetty
+macOS persistence tool  
+https://github.com/CyborgSecurity/PoisonApple
 ~~~
 AI
 ~~~
