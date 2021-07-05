@@ -32,16 +32,16 @@ jobs:
         # https://cuckoo.sh/docs/installation/host/requirements.html 
       - name: "cuckoo - Installing Python libraries"
         run: brew install libmagic cairo pango openssl
-      - name: "expose the openssl header files in the standard GCC/Clang include directory"
+      - name: "cuckoo - expose the openssl header files in the standard GCC/Clang include directory"
         run: cd /usr/local/include && ln -s ../opt/openssl/include/openssl .    
         # dockle
-      - name: "expose the openssl header files in the standard GCC/Clang include directory"
-        run: |
-          brew untap goodwithtech/dockle
-          brew install goodwithtech/r/dockle
-          #Scan an image file
-          docker save alpine:latest -o alpine.tar 
-          dockle --input alpine.tar                                             
+      # - name: "Install dockle"
+      #   run: |
+      #     brew untap goodwithtech/dockle
+      #     brew install goodwithtech/r/dockle
+      #     #Scan an image file
+      #     docker save alpine:latest -o alpine.tar 
+      #     dockle --input alpine.tar                                             
 
 
   macos-110:
@@ -63,9 +63,9 @@ jobs:
         # cuckoo    
         # Installing Python libraries (on Mac OS X)
         # https://cuckoo.sh/docs/installation/host/requirements.html                            
-      - name: "Installing Python libraries"
+      - name: "cuckoo - Installing Python libraries"
         run: brew install libmagic cairo pango openssl
-      - name: "expose the openssl header files in the standard GCC/Clang include directory"
+      - name: "cuckoo - expose the openssl header files in the standard GCC/Clang include directory"
         run: cd /usr/local/include && ln -s ../opt/openssl/include/openssl .  
 
   macos-1015:
@@ -87,7 +87,7 @@ jobs:
         # cuckoo    
         # Installing Python libraries (on Mac OS X)
         # https://cuckoo.sh/docs/installation/host/requirements.html                            
-      - name: "Installing Python libraries"
+      - name: "cuckoo - Installing Python libraries"
         run: brew install libmagic cairo pango openssl
-      - name: "expose the openssl header files in the standard GCC/Clang include directory"
+      - name: "cuckoo - expose the openssl header files in the standard GCC/Clang include directory"
         run: cd /usr/local/include && ln -s ../opt/openssl/include/openssl . 
