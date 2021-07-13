@@ -29,6 +29,24 @@ jobs:
           source $HOME/.cargo/env
           rustup update
           rustc --version
+          cargo --version
+      # https://doc.rust-lang.org/book/ch01-02-hello-world.html
+      - name: "Hello World rust"
+        run:   | 
+          mkdir ~/projects
+          cd ~/projects
+          mkdir hello_world
+          cd hello_world
+          cat <<EOT | sudo tee main.rs
+          fn main() {
+          println!("Hello, world!");
+          }
+          EOT
+          ls -lai
+          rustc main.rs
+          ls -lai
+          ./main
+
 
   # macos-latest-python-venv:
   #     name: "macos-latest macos-latest 10.15.7 python venv"
