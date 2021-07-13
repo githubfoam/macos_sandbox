@@ -27,28 +27,28 @@ jobs:
       - name: "add Rust to your system PATH manually"
         run:   source $HOME/.cargo/env
 
-  macos-latest-python-venv:
-      name: "macos-latest macos-latest 10.15.7 python venv"
-      runs-on: macos-latest
-      steps:
-      - name: Checkout
-        uses: actions/checkout@v1
-      - name: "brew update"
-        run: brew update      
-      - name: "check on brew version"
-        run: brew --version   #Homebrew 2.5.12   
-      - name: "python --version"
-        run:   python --version #Python 2.7.18
-      - name: "pip install virtualenv"
-        run:   pip install virtualenv               
-      - name: "echo $PATH"
-        run:   echo $PATH
-      - name: "add to $PATH"
-        run:   export PATH="/Library/Frameworks/Python.framework/Versions/2.7/bin:$PATH"              
-      - name: "source ~/.bash_profile"
-        run:   source ~/.bash_profile
-      - name: "echo $PATH"
-        run:   echo $PATH       
+  # macos-latest-python-venv:
+  #     name: "macos-latest macos-latest 10.15.7 python venv"
+  #     runs-on: macos-latest
+  #     steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v1
+  #     - name: "brew update"
+  #       run: brew update      
+  #     - name: "check on brew version"
+  #       run: brew --version   #Homebrew 2.5.12   
+  #     - name: "python --version"
+  #       run:   python --version #Python 2.7.18
+  #     - name: "pip install virtualenv"
+  #       run:   pip install virtualenv               
+  #     - name: "echo $PATH"
+  #       run:   echo $PATH
+  #     - name: "add to $PATH"
+  #       run:   export PATH="/Library/Frameworks/Python.framework/Versions/2.7/bin:$PATH"              
+  #     - name: "source ~/.bash_profile"
+  #       run:   source ~/.bash_profile
+  #     - name: "echo $PATH"
+  #       run:   echo $PATH       
       # - name: "virtualenv --version" 
       #   run:   virtualenv --version  #virtualenv: command not found       
       # - name: "virtualenv -p $(which python2) ~venvpython2x"
