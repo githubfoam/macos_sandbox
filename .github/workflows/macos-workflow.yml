@@ -23,9 +23,12 @@ jobs:
       - name: "check on brew version"
         run: brew --version   #Homebrew 2.5.12   
       - name: "Install rustup"
-        run:   $ curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSfy | sh
+        run:   curl https://sh.rustup.rs -sSf | sh -s -- -y
       - name: "add Rust to your system PATH manually"
-        run:   source $HOME/.cargo/env
+        run:   | 
+          source $HOME/.cargo/env
+          rustup update
+          rustc --version
 
   # macos-latest-python-venv:
   #     name: "macos-latest macos-latest 10.15.7 python venv"
