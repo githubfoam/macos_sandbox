@@ -49,6 +49,7 @@ jobs:
       # https://doc.rust-lang.org/book/ch01-03-hello-cargo.html
       - name: "Hello Cargo"
         run:   | 
+          cargo update
           ls -lai
           cd ~/projects
           cargo --version
@@ -57,11 +58,24 @@ jobs:
           ls -lai
           cat Cargo.toml
           cat src/main.rs
+          cargo clean -v
+          tree .
           cargo check
-          cargo build
+          cargo build -v
           ./target/debug/hello_cargo
+          cargo build --release
+          cargo clean -v
+          tree .
           cargo check
           cargo run
+          cargo build --release
+          cargo clean -v
+          tree .
+          cargo new --lib libhello
+          tree .
+          cd libhello/
+          cat src/lib.rs 
+          cargo test
 
   # macos-latest-python-venv:
   #     name: "macos-latest macos-latest 10.15.7 python venv"
