@@ -56,6 +56,12 @@ jobs:
           cd hello_cargo
           ls -lai
           cat Cargo.toml
+          cat src/main.rs
+          cargo check
+          cargo build
+          ./target/debug/hello_cargo
+          cargo check
+          cargo run
 
   # macos-latest-python-venv:
   #     name: "macos-latest macos-latest 10.15.7 python venv"
