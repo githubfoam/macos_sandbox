@@ -49,17 +49,13 @@ jobs:
       # https://doc.rust-lang.org/book/ch01-03-hello-cargo.html
       - name: "Hello Cargo"
         run:   | 
-          mkdir ~/projects
+          ls -lai
           cd ~/projects
           cargo --version
           cargo new hello_cargo
           cd hello_cargo
           ls -lai
           cat Cargo.toml
-          ls -lai
-          rustc main.rs
-          ls -lai
-          ./main
 
   # macos-latest-python-venv:
   #     name: "macos-latest macos-latest 10.15.7 python venv"
