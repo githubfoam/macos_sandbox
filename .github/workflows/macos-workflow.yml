@@ -12,7 +12,22 @@ on:
 
 jobs:
 
-  macos-latest-docker-venv:
+  macos-latest-rust:
+      name: "macos-latest macos-latest 10.15.7 rust"
+      runs-on: macos-latest
+      steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: "brew update"
+        run: brew update      
+      - name: "check on brew version"
+        run: brew --version   #Homebrew 2.5.12   
+      - name: "Install rustup"
+        run:   curl https://sh.rustup.rs -sSf | sh
+      - name: "add Rust to your system PATH manually"
+        run:   source $HOME/.cargo/env
+
+  macos-latest-python-venv:
       name: "macos-latest macos-latest 10.15.7 python venv"
       runs-on: macos-latest
       steps:
@@ -34,8 +49,8 @@ jobs:
         run:   source ~/.bash_profile
       - name: "echo $PATH"
         run:   echo $PATH       
-      - name: "virtualenv --version"
-        run:   virtualenv --version         
+      # - name: "virtualenv --version" 
+      #   run:   virtualenv --version  #virtualenv: command not found       
       # - name: "virtualenv -p $(which python2) ~venvpython2x"
       #   run:   virtualenv -p $(which python2) ~~venvpython2x
       # - name: "source ~venvpython2x/bin/activate"
