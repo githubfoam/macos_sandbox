@@ -65,16 +65,3 @@ jobs:
       #   run: |
       #     brew doctor #Check brew for potential problems           
 
-
-  macos-latest:
-      name: "MacPorts macos-latest macos-latest 10.15.7"
-      runs-on: macos-latest
-      steps:
-      - name: Checkout
-        uses: actions/checkout@v1
-      - name: "brew update"
-        run: brew update      
-      # - name: "brew upgrade"
-      #   run: brew upgrade
-      - name: "check on brew version"
-        run: brew --version && port version  #Homebrew 2.5.12 

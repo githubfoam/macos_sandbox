@@ -49,7 +49,6 @@ jobs:
       # https://doc.rust-lang.org/book/ch01-03-hello-cargo.html
       - name: "Hello Cargo"
         run:   | 
-          cargo update
           ls -lai
           cd ~/projects
           cargo --version
@@ -58,12 +57,24 @@ jobs:
           ls -lai
           cat Cargo.toml
           cat src/main.rs
+          tree .
           cargo clean -v
           tree .
           cargo check
           cargo build -v
           ./target/debug/hello_cargo
           cargo build --release
+      - name: "Hello Cargo"
+        run:   | 
+          ls -lai
+          cd ~/projects
+          cargo --version
+          cargo new hello_cargo
+          cd hello_cargo
+          ls -lai
+          cat Cargo.toml
+          cat src/main.rs
+          tree .
           cargo clean -v
           tree .
           cargo check
